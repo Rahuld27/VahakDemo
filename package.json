@@ -9,6 +9,7 @@
     "@reduxjs/toolkit": "^1.4.0",
     "D": "^1.0.0",
     "axios": "^0.19.2",
+    "caniuse-lite": "^1.0.30001238",
     "chart.js": "^2.9.3",
     "chartjs-plugin-datalabels": "^0.7.0",
     "local-storage": "^2.0.0",
