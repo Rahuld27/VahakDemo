@@ -67,7 +67,7 @@ const useStyles = makeStyles((theme) => ({
   }
 }));
 
-function page4() {
+function Page4() {
   const classes = useStyles();
 
   const [journeyDetails, setjourneyDetails] = useState("journeyDetails");
@@ -141,7 +141,40 @@ function page4() {
                     notched="true"
                     margin="none"
                     value={`${"8888888888"}${"                                                            Rahul"}${"                                                                        Call me immediately"}`}
-                    InputProps={{ endAdornment: <p style={{textAlign: 'left'}}><span style={{color: 'rgb(32, 33, 36)', fontFamily: '"Google Sans", arial, sans-serif', fontSize: '24px', fontStyle: 'normal', fontVariantLigatures: 'normal', fontVariantCaps: 'normal', fontWeight: 400, letterSpacing: 'normal', orphans: 2, textAlign: 'left', textIndent: '0px', textTransform: 'none', whiteSpace: 'normal', widows: 2, wordSpacing: '0px', WebkitTextStrokeWidth: '0px', backgroundColor: 'rgb(255, 255, 255)', textDecorationThickness: 'initial', textDecorationStyle: 'initial', textDecorationColor: 'initial', display: 'inline !important', float: 'none'}}><strong>₹10,560</strong></span></p> }}
+                    InputProps={{
+                      endAdornment: (
+                        <p style={{ textAlign: "left" }}>
+                          <span
+                            style={{
+                              color: "rgb(32, 33, 36)",
+                              fontFamily: '"Google Sans", arial, sans-serif',
+                              fontSize: "24px",
+                              fontStyle: "normal",
+                              fontVariantLigatures: "normal",
+                              fontVariantCaps: "normal",
+                              fontWeight: 400,
+                              letterSpacing: "normal",
+                              orphans: 2,
+                              textAlign: "left",
+                              textIndent: "0px",
+                              textTransform: "none",
+                              whiteSpace: "normal",
+                              widows: 2,
+                              wordSpacing: "0px",
+                              WebkitTextStrokeWidth: "0px",
+                              backgroundColor: "rgb(255, 255, 255)",
+                              textDecorationThickness: "initial",
+                              textDecorationStyle: "initial",
+                              textDecorationColor: "initial",
+                              display: "inline !important",
+                              float: "none"
+                            }}
+                          >
+                            <strong>₹10,560</strong>
+                          </span>
+                        </p>
+                      )
+                    }}
                     autoFocus
                   />
                 </Card>
@@ -151,7 +184,7 @@ function page4() {
                   <TextField
                     id="otp"
                     value="We have sent an OTP to your mobile number, Please enter it below and submit your bid -8888888888"
-                    InputProps={{ endAdornment:<EditButton />  }}
+                    InputProps={{ endAdornment: <EditButton /> }}
                     onInput={(e) => setotp(e.target.value)}
                     fullWidth
                     autoFocus
@@ -165,20 +198,28 @@ function page4() {
 
             <Grid container spacing={10}>
               <Grid container item xs={3} spacing={1}>
-                  <TextField  value="6" />
+                <TextField value="6" />
               </Grid>
               <Grid container item xs={3} spacing={2}>
-              <TextField value="4"/>
+                <TextField value="4" />
               </Grid>
               <Grid container item xs={3} spacing={1}>
-              <TextField  value="3"/>
+                <TextField value="3" />
               </Grid>
               <Grid container item xs={3} spacing={2}>
-              <TextField  value="1"/>
+                <TextField value="1" />
               </Grid>
             </Grid>
-<br />
-<p style={{textAlign: 'center'}}><a href="http://resent otp"><strong><span style={{color: 'rgb(44, 130, 201)'}}>Resend otp again</span></strong></a></p>
+            <br />
+            <p style={{ textAlign: "center" }}>
+              <a href="http://resent otp">
+                <strong>
+                  <span style={{ color: "rgb(44, 130, 201)" }}>
+                    Resend otp again
+                  </span>
+                </strong>
+              </a>
+            </p>
             <Button
               type="submit"
               fullWidth
@@ -194,4 +235,4 @@ function page4() {
     </React.Fragment>
   );
 }
-export default page4;
+export default Page4;

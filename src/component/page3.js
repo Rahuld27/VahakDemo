@@ -61,7 +61,7 @@ const useStyles = makeStyles((theme) => ({
   }
 }));
 
-function Register() {
+function Page3() {
   const classes = useStyles();
 
   const [journeyDetails, setjourneyDetails] = useState("journeyDetails");
@@ -209,4 +209,4 @@ function Register() {
     </React.Fragment>
   );
 }
-export default Register;
+export default Page3;

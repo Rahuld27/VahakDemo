@@ -59,7 +59,7 @@ const useStyles = makeStyles((theme) => ({
   }
 }));
 
-function page2() {
+function Page2() {
   const classes = useStyles();
 
   const [journeyDetails, setjourneyDetails] = useState("journeyDetails");
@@ -144,4 +144,4 @@ function page2() {
     </React.Fragment>
   );
 }
-export default page2;
+export default Page2;

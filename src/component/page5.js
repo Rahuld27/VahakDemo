@@ -67,7 +67,7 @@ const useStyles = makeStyles((theme) => ({
   }
 }));
 
-function page5() {
+function Page5() {
   const classes = useStyles();
 
   const [journeyDetails, setjourneyDetails] = useState("journeyDetails");
@@ -141,14 +141,46 @@ function page5() {
                     notched="true"
                     margin="none"
                     value={`${"8888888888"}${"                                                            Rahul"}${"                                                                        Call me immediately"}`}
-                    InputProps={{ endAdornment: <p style={{textAlign: 'left'}}><span style={{color: 'rgb(32, 33, 36)', fontFamily: '"Google Sans", arial, sans-serif', fontSize: '24px', fontStyle: 'normal', fontVariantLigatures: 'normal', fontVariantCaps: 'normal', fontWeight: 400, letterSpacing: 'normal', orphans: 2, textAlign: 'left', textIndent: '0px', textTransform: 'none', whiteSpace: 'normal', widows: 2, wordSpacing: '0px', WebkitTextStrokeWidth: '0px', backgroundColor: 'rgb(255, 255, 255)', textDecorationThickness: 'initial', textDecorationStyle: 'initial', textDecorationColor: 'initial', display: 'inline !important', float: 'none'}}><strong>₹10,560</strong></span></p> }}
+                    InputProps={{
+                      endAdornment: (
+                        <p style={{ textAlign: "left" }}>
+                          <span
+                            style={{
+                              color: "rgb(32, 33, 36)",
+                              fontFamily: '"Google Sans", arial, sans-serif',
+                              fontSize: "24px",
+                              fontStyle: "normal",
+                              fontVariantLigatures: "normal",
+                              fontVariantCaps: "normal",
+                              fontWeight: 400,
+                              letterSpacing: "normal",
+                              orphans: 2,
+                              textAlign: "left",
+                              textIndent: "0px",
+                              textTransform: "none",
+                              whiteSpace: "normal",
+                              widows: 2,
+                              wordSpacing: "0px",
+                              WebkitTextStrokeWidth: "0px",
+                              backgroundColor: "rgb(255, 255, 255)",
+                              textDecorationThickness: "initial",
+                              textDecorationStyle: "initial",
+                              textDecorationColor: "initial",
+                              display: "inline !important",
+                              float: "none"
+                            }}
+                          >
+                            <strong>₹10,560</strong>
+                          </span>
+                        </p>
+                      )
+                    }}
                     autoFocus
                   />
                 </Card>
               </Grid>
-
             </Grid>
-<br />
+            <br />
             <Button
               type="submit"
               fullWidth
@@ -164,4 +196,4 @@ function page5() {
     </React.Fragment>
   );
 }
-export default page5;
+export default Page5;

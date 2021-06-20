@@ -7,16 +7,11 @@ import {
   React,
   TextField,
   Typography,
-  Toolbar,
   useState,
-  AppBar,
-  IconButton,
-  MenuIcon
+  InputLabel
 } from "../component";
 
-import InputLabel from "@material-ui/core/InputLabel";
 import Select from "@material-ui/core/Select";
-import { blue } from "@material-ui/core/colors";
 
 const useStyles = makeStyles((theme) => ({
   paper: {
@@ -46,7 +41,7 @@ const useStyles = makeStyles((theme) => ({
   }
 }));
 
-function page1() {
+function Page1() {
   const classes = useStyles();
 
   const [sourceLocation, setsourceLocation] = useState("sourceLocation");
@@ -158,4 +153,4 @@ function page1() {
     </React.Fragment>
   );
 }
-export default page1;
+export default Page1;

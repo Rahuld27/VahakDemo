@@ -1,23 +1,30 @@
-import React, { useState } from 'react';
+import React, { useState } from "react";
 import {
   Stepper,
   Step,
   StepLabel,
   Button,
   Typography,
-  CircularProgress
-} from '@material-ui/core';
-import { Formik, Form } from 'formik';
+  CircularProgress,
+  CheckoutSuccess
+} from "@material-ui/core";
+import { Formik, Form } from "formik";
 
-import page1 from './component/page1';
-import page2 from './component/page2';
-import page3 from './component/page3';
-import page4 from './component/page4';
-import page5 from './component/page5';
+import page1 from "./page1";
+import page2 from "./page2";
+import page3 from "./page3";
+import page4 from "./page4";
+import page5 from "./page5";
 
-import useStyles from './styles';
+import useStyles from "@material-ui/core/styles";
 
-const steps = ['Enter Bid Details', 'Place your bid', 'Verify Via OTP','Verify OTP','Summary & submit bid'];
+const steps = [
+  page1,
+  "Place your bid",
+  "Verify Via OTP",
+  "Verify OTP",
+  "Summary & submit bid"
+];
 
 function _renderStepContent(step) {
   switch (step) {
@@ -30,7 +37,7 @@ function _renderStepContent(step) {
     case 3:
       return <page4 />;
     case 4:
-      return <page5 />;	  
+      return <page5 />;
     default:
       return <div>Not Found</div>;
   }
@@ -42,7 +49,7 @@ export default function CheckoutPage() {
   const isLastStep = activeStep === steps.length - 1;
 
   function _sleep(ms) {
-    return new Promise(resolve => setTimeout(resolve, ms));
+    return new Promise((resolve) => setTimeout(resolve, ms));
   }
 
   async function _submitForm(values, actions) {
@@ -73,7 +80,7 @@ export default function CheckoutPage() {
         Vahak
       </Typography>
       <Stepper activeStep={activeStep} className={classes.stepper}>
-        {steps.map(label => (
+        {steps.map((label) => (
           <Step key={label}>
             <StepLabel>{label}</StepLabel>
           </Step>
@@ -83,11 +90,9 @@ export default function CheckoutPage() {
         {activeStep === steps.length ? (
           <CheckoutSuccess />
         ) : (
-          <Formik
-            onSubmit={_handleSubmit}
-          >
+          <Formik onSubmit={_handleSubmit}>
             {({ isSubmitting }) => (
-              <Form id={formId}>
+              <Form id={"newformId"}>
                 {_renderStepContent(activeStep)}
 
                 <div className={classes.buttons}>
@@ -104,7 +109,7 @@ export default function CheckoutPage() {
                       color="primary"
                       className={classes.button}
                     >
-                      {isLastStep ? 'Summary & submit bid'' : 'Next'}
+                      {isLastStep ? "Summary & submit bid" : "Next"}
                     </Button>
                     {isSubmitting && (
                       <CircularProgress

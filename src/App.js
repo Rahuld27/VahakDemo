@@ -1,6 +1,6 @@
-import React from 'react';
-import MaterialLayout from './components/Layout/MaterialLayout';
-import CheckoutPage from './components/CheckoutPage';
+import React from "react";
+import MaterialLayout from "@material-ui/core";
+import CheckoutPage from "./component/CheckoutPage";
 
 function App() {
   return (
