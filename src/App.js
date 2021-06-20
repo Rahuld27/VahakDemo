@@ -1,136 +1,124 @@
-import {CssBaseline, makeStyles, React, Route, Router, Switch, UINavBar,} from "./component"
+import React, { useState } from 'react';
+import {
+  Stepper,
+  Step,
+  StepLabel,
+  Button,
+  Typography,
+  CircularProgress
+} from '@material-ui/core';
+import { Formik, Form } from 'formik';
 
+import page1 from './component/page1';
+import page2 from './component/page2';
+import page3 from './component/page3';
+import page4 from './component/page4';
+import page5 from './component/page5';
 
+import useStyles from './styles';
 
-import './App.css';
-import {useSelector} from "react-redux";
-import {useEffect} from "react";
-import {setAuthToken} from "./auth/authDispatcher";
-import GuardedRoute from "./shared/GuardedRoute";
-import UpdateLabResult from "./lab/UpdateLabResult";
-import PendingConsultations from "./consultation/PendingConsultations";
-import UpdateConsultation from "./consultation/UpdateConsultation";
-import UserHistory from "./testrequests/UserHistory";
+const steps = ['Enter Bid Details', 'Place your bid', 'Verify Via OTP','Verify OTP','Summary & submit bid'];
 
-import UpdateThreshold from "./authority/UpdateThreshold";
-import ViewAllRequests from "./authority/ViewAllRequests";
-import AppNotificationComponent from "./shared/notification/app-notification-component";
-import Register from "./auth/Register";
-import {UploadDocument} from "./documents/UploadDocument";
-import PendingApprovals from "./authority/PendingApprovals";
-import LoadingIndicatorComponent from "./shared/loader/loading-indicator-component";
-import ConfirmMessageComponent from "./shared/confirm/confirm-message-component";
-import PendingLabTests from "./lab/PendingLabTests";
-import LabHistory from "./lab/LabHistory";
-import ConsultationHistory from "./consultation/ConsultationHistory";
-import Profile from "./profile/Profile";
-import RequestTest from "./testrequests/RequestTest";
-import Login from "./auth/Login";
-import AuthorityDashboard from "./authority/AuthorityDashboard";
-import {Redirect} from "react-router-dom";
-
-const useStyles = makeStyles((theme) => ({
-
-  '@global': {
-    body: {
-      backgroundColor: '#e6e6e6'
-    },
-    footer:{
-      marginTop:'calc(5% + 60px)',
-      bottom: 0
-    }
-  },
-  footer:{
-    marginTop:'calc(5% + 60px)',
-    bottom: 0
+function _renderStepContent(step) {
+  switch (step) {
+    case 0:
+      return <page1 />;
+    case 1:
+      return <page2 />;
+    case 2:
+      return <page3 />;
+    case 3:
+      return <page4 />;
+    case 4:
+      return <page5 />;	  
+    default:
+      return <div>Not Found</div>;
   }
-
-
-}));
-
-
-function App() {
-  const classes = useStyles();
-  const {user,token,isLoggedIn,roles} = useSelector(state => state.auth);
-
-  const auth = {user,token,isLoggedIn,roles}
-
-  let  {isUser,isDoctor,isAuthority,isTester,isApproved} = roles
-
-
-
-  let homePage = '/login'
-
-  if(isLoggedIn)
-    homePage ='/profile'
-
-  useEffect(() => {
-
-
-    if(token && user){
-      setAuthToken(token)
-
-    }
-
-  }, [token]);
-
-  return (<React.Fragment>
-
-        <LoadingIndicatorComponent></LoadingIndicatorComponent>
-        <UINavBar />
-        <ConfirmMessageComponent/>
-        <Switch>
-          <Route path="/login">
-            <Login />
-          </Route>
-          <Route path="/register">
-            <Register />
-          </Route>
-          <Route path="/upload-document/:role/:id">
-            <UploadDocument />
-          </Route>
-          <GuardedRoute path='/profile' component={Profile} auth={isLoggedIn} />
-          <GuardedRoute path='/request-test' component={RequestTest} auth={isUser} />
-
-          <GuardedRoute path='/user-history' component={UserHistory} auth={isUser} />
-
-          {/*<GuardedRoute path='/test-detail/:id' component={TestDetail} auth={isLoggedIn} />*/}
-          <GuardedRoute path='/lab-history' component={LabHistory} auth={isTester} />
-
-          <GuardedRoute path='/pending-lab-tests' component={PendingLabTests} auth={isTester} />
-          <GuardedRoute path='/update-lab-report/:id' component={UpdateLabResult} auth={isTester} />
-
-
-          <GuardedRoute path='/consultation-history' component={ConsultationHistory} auth={isDoctor} />
-          <GuardedRoute path='/pending-consultations' component={PendingConsultations} auth={isDoctor} />
-          <GuardedRoute path='/update-consultation/:id' component={UpdateConsultation} auth={isDoctor} />
-
-          <GuardedRoute path='/update-thresholds' component={UpdateThreshold} auth={isAuthority} />
-          <GuardedRoute path='/pending-user-approvals' component={PendingApprovals} auth={isAuthority} />
-          <GuardedRoute path='/view-all-requests' component={ViewAllRequests} auth={isAuthority} />
-          <GuardedRoute path='/dashboard' component={AuthorityDashboard} auth={isAuthority} />
-
-
-          {/*<Route path="/tests-requested">*/}
-          {/*  <TestsRequested />*/}
-          {/*</Route>*/}
-          {/*<Route path="/test-result">*/}
-          {/*  <TestResult />*/}
-          {/*</Route>*/}
-          {/*<Route path="/take-sample">*/}
-          {/*  <TakeSample />*/}
-          {/*</Route>*/}
-
-          <Route path="/">
-            <Redirect to={homePage} />
-          </Route>
-        </Switch>
-        <AppNotificationComponent/>
-
-
-    </React.Fragment>
-
-  );
 }
 
-export default App;
+export default function CheckoutPage() {
+  const classes = useStyles();
+  const [activeStep, setActiveStep] = useState(0);
+  const isLastStep = activeStep === steps.length - 1;
+
+  function _sleep(ms) {
+    return new Promise(resolve => setTimeout(resolve, ms));
+  }
+
+  async function _submitForm(values, actions) {
+    await _sleep(1000);
+    alert(JSON.stringify(values, null, 2));
+    actions.setSubmitting(false);
+
+    setActiveStep(activeStep + 1);
+  }
+
+  function _handleSubmit(values, actions) {
+    if (isLastStep) {
+      _submitForm(values, actions);
+    } else {
+      setActiveStep(activeStep + 1);
+      actions.setTouched({});
+      actions.setSubmitting(false);
+    }
+  }
+
+  function _handleBack() {
+    setActiveStep(activeStep - 1);
+  }
+
+  return (
+    <React.Fragment>
+      <Typography component="h1" variant="h4" align="center">
+        Vahak
+      </Typography>
+      <Stepper activeStep={activeStep} className={classes.stepper}>
+        {steps.map(label => (
+          <Step key={label}>
+            <StepLabel>{label}</StepLabel>
+          </Step>
+        ))}
+      </Stepper>
+      <React.Fragment>
+        {activeStep === steps.length ? (
+          <CheckoutSuccess />
+        ) : (
+          <Formik
+            onSubmit={_handleSubmit}
+          >
+            {({ isSubmitting }) => (
+              <Form id={formId}>
+                {_renderStepContent(activeStep)}
+
+                <div className={classes.buttons}>
+                  {activeStep !== 0 && (
+                    <Button onClick={_handleBack} className={classes.button}>
+                      Back
+                    </Button>
+                  )}
+                  <div className={classes.wrapper}>
+                    <Button
+                      disabled={isSubmitting}
+                      type="submit"
+                      variant="contained"
+                      color="primary"
+                      className={classes.button}
+                    >
+                      {isLastStep ? 'Summary & submit bid'' : 'Next'}
+                    </Button>
+                    {isSubmitting && (
+                      <CircularProgress
+                        size={24}
+                        className={classes.buttonProgress}
+                      />
+                    )}
+                  </div>
+                </div>
+              </Form>
+            )}
+          </Formik>
+        )}
+      </React.Fragment>
+    </React.Fragment>
+  );
+}
